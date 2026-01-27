@@ -1,0 +1,33 @@
+name: Selenium Test Execution
+
+# The "on" section defines what triggers the workflow
+on:
+  push:
+    branches: [ "main" ]    # Runs whenever you push code to main
+  pull_request:
+    branches: [ "main" ]    # Runs whenever you open a PR
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: '19'
+          distribution: 'temurin'
+
+      - name: Install Xvfb
+        run: sudo apt-get install xvfb
+
+      - name: Run Tests with Virtual Display
+        # xvfb-run creates a virtual monitor (1280x1024)
+        run: xvfb-run --server-args="-screen 0 1280x1024x24" mvn test
+
+      - name: Upload Video Logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: execution-reports
+          path: recordings/
