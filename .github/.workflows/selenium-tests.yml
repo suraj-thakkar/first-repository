@@ -3,9 +3,9 @@ name: Selenium Test Execution
 # The "on" section defines what triggers the workflow
 on:
   push:
-    branches: [ "main" ]    # Runs whenever you push code to main
+    branches: [ "main","test","yogi" ]    # Runs whenever you push code to main
   pull_request:
-    branches: [ "main" ]    # Runs whenever you open a PR
+    branches: [ "main","test","yogi" ]    # Runs whenever you open a PR
   workflow_dispatch:
 jobs:
   test:
