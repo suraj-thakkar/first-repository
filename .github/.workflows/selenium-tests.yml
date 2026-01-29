@@ -24,6 +24,12 @@ jobs:
       - name: Run Tests with Virtual Display
         # xvfb-run creates a virtual monitor (1280x1024)
         run: xvfb-run --server-args="-screen 0 1280x1024x24" mvn test
+                 - name: Upload Video Artifacts
+                   if: always() # This ensures video is uploaded even if the test fails
+                   uses: actions/upload-artifact@v4
+                   with:
+                     name: execution-video
+                     path: recordings/
 
       - name: Upload Video Logs
         if: always()

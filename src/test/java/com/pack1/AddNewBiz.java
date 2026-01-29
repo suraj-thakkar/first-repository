@@ -38,6 +38,7 @@ public class AddNewBiz {
         WebDriverManager.chromedriver().setup();
 
         ChromeOptions options = new ChromeOptions();
+        options.addArguments("--window-size=1280,1024");
         options.addArguments("--remote-allow-origins=*");
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
@@ -47,7 +48,7 @@ public class AddNewBiz {
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(90));
 
         try {
             executeBusinessFlow(wait);
@@ -116,7 +117,7 @@ public class AddNewBiz {
         File dir = new File("recordings");
         if (!dir.exists()) dir.mkdirs();
 
-        java.awt.Rectangle screenSize = new java.awt.Rectangle(0, 0, 1920, 1080);
+        java.awt.Rectangle screenSize = new java.awt.Rectangle(0, 0, 1280, 1024);
 
         GraphicsConfiguration gc = GraphicsEnvironment
                 .getLocalGraphicsEnvironment()
